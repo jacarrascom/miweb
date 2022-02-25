@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <img class="space" src="./assets/img/logo.png" height="35px" alt="">
+  <span class="space"> Modulo de Requerimientos de Contratación </span>
+  <span class="spacer"></span>
+  <!--  <button mat-button routerLink="/dashboard">Inicio</button>-->
+  <!--  <button mat-button routerLink="/dashboard/usuarios">Acerca de</button>-->
+  <!--  <button mat-button routerLink="/dashboard/reportes">Contacto</button>-->
+  <!--  <span class="spacer"></span>-->
+
+  <button mat-button *ngIf="isLogged"  (click)="profile()" > {{ razonSocial }}</button>
+  <button *ngIf="isLogged" mat-icon-button (click)="logout()" aria-label="icon-button with menu icon">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+  <button mat-flat-button color="warn" *ngIf="isLogged" (click)="logout()">
+    Cerrar Sesion
+  </button>
+
+  <button mat-flat-button color="primary" *ngIf="!isLogged" (click)="register()">
+    Registro de Proveedor
+  </button>
+
+  <button mat-flat-button color="primary" *ngIf="!isLogged" (click)="login()">
+    Iniciar Sesion
+  </button>
+  <img class="space" src="./assets/img/Logo-Ceabe-Aprobado-2.png" height="35px" alt="">
+</mat-toolbar>
+

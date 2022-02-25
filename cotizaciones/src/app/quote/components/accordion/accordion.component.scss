@@ -1,0 +1,35 @@
+@import "src/stylings/_variables.scss"; 
+
+.container {
+    .select {
+        height: 50px;
+        background: #ffffff;
+        box-shadow: 0px 8px 40px rgba(0, 0, 0, 0.06);
+        border-radius: 6px;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        user-select: none;
+        margin-bottom: 2px;
+        span {
+            font: 600 $font-size-md $font-family-Inter;
+            color: $dark-grey;
+        }
+        img {
+            height: 10px;
+        }
+    }
+    .dropdown {
+        max-height: 0;
+        overflow: hidden;
+        background-color: #ffffff;
+        border-radius: 6px;
+        &.opened {
+            padding: 26px 16px;
+            max-height: 700px;
+            transition: max-height 0.25s ease-in;
+        }
+    }
+}

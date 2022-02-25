@@ -1,0 +1,153 @@
+<div>
+  <mat-table #table matSort class="mat-cell">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.title}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.state}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.url}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Cargo</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.created_at}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_at">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Correo</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.updated_at}}</mat-cell>
+    </ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell>
+        <button mat-icon-button color="primary" (click)="addNew()">
+          <mat-icon aria-label=" ">add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent"
+                (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="deleteItem(i, row.id, row.title, row.state, row.url)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<!--    <div class="d-flex justify-content-between">-->
+<!--      <div>-->
+<!--        <h4> {{title}}</h4>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <button mat-raised-button color="accent" (click)="removeForm()">X</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<form (keyup)="sendForm()" [formGroup]="formContact" class="form">
+
+  <mat-form-field disabled="true" class="example-full-width" appearance="fill">
+    <mat-label>ID</mat-label>
+    <input disabled="true" type="text" matInput formControlName="id">
+    <!--      <mat-error *ngIf="f.id.invalid">-->
+    <!--        Este campo es requerido-->
+    <!--      </mat-error>-->
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input type="text" matInput formControlName="name">
+    <mat-error *ngIf="f.name.invalid">
+      Este campo es requerido
+    </mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Apellidos</mat-label>
+    <input type="text" matInput formControlName="lastName">
+    <mat-error *ngIf="f.lastName.invalid">
+      Este campo es requerido
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Teléfono</mat-label>
+    <input type="text" matInput formControlName="phone">
+    <mat-error *ngIf="f.phone.invalid">
+      Este campo es requerido
+    </mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Cargo</mat-label>
+    <input type="text" matInput formControlName="position">
+    <mat-error *ngIf="f.position.invalid">
+      Este campo es requerido
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Correo</mat-label>
+    <input type="text" matInput formControlName="email">
+    <mat-error *ngIf="f.email.invalid">
+      Este campo es requerido
+    </mat-error>
+  </mat-form-field>
+  <br/>
+
+
+</form>
+
+
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+
+<!--&lt;!&ndash;        <div class="form-group  input-group">&ndash;&gt;-->
+<!--&lt;!&ndash;          <input formControlName="name" class="form-control" placeholder="Nombres" type="text"&ndash;&gt;-->
+<!--&lt;!&ndash;                 [ngClass]="{ 'is-invalid' : f.name.errors && f.name.value != ''}">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--&lt;!&ndash;        <div class="form-group input-group">&ndash;&gt;-->
+<!--&lt;!&ndash;          <input formControlName="lastName" class="form-control" placeholder="Apellidos"&ndash;&gt;-->
+<!--&lt;!&ndash;                 [ngClass]="{ 'is-invalid' : f.lastName.errors && f.lastName.value != ''}" type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <div class="form-group input-group">-->
+<!--          <input formControlName="phone" class="form-control" placeholder="Teléfono"-->
+<!--                 [ngClass]="{ 'is-invalid' : f.phone.errors && f.phone.value != ''}" type="text">-->
+<!--        </div>-->
+<!--        <div class="form-group input-group">-->
+<!--          <input formControlName="position" class="form-control" placeholder="Cargo"-->
+<!--                 [ngClass]="{ 'is-invalid' : f.position.errors && f.position.value != '' }" type="text">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--        <div class="form-group input-group">-->
+<!--          <input formControlName="email" class="form-control" placeholder="Correo"-->
+<!--                 [ngClass]="{ 'is-invalid' : f.email.errors && f.email.value != ''}" type="text">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->

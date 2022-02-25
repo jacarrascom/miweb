@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="select" (click)="open = !open">
+        <span>{{ selected?.caption }}</span>
+        <img src="assets/icons/chevron-down.png" alt="">
+    </div>
+    <div class="dropdown" [ngClass]="{'opened': open}">
+        <option (click)="selectOption(option)" *ngFor="let option of options" [value]="option.value">{{ option.caption }}</option>
+    </div>
+</div>
+<div *ngIf="open" (click)="open = false" class="background">
+</div>

@@ -1,0 +1,227 @@
+<div class="container" xmlns="http://www.w3.org/1999/html">
+  <div *ngIf="quote; else unexistingQuote">
+    <ng-container *ngTemplateOutlet="quote.postulated ? postulatedQuote : nonPostulatedQuote"></ng-container>
+  </div>
+  <ng-template #unexistingQuote>
+    <div class="nonexistent-quote">
+      Cotización inexistente
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #nonPostulatedQuote>
+  <header>
+    <img [routerLink]="['cotizaciones']" src="assets/icons/arrow-left.png" alt="">
+    <span>Detalle de Cotización</span>
+  </header>
+  <section class="top-section">
+    <p>A través del presente documento, el SEGURO SOCIAL DE SALUD - ESSALUD, le agradece cotizar el
+      requerimiento para la {{ quote?.description }}.
+    </p>
+  </section>
+  <br/>
+  <section>
+    <table width="100%">
+      <th class="economic-proposal ">
+        <div>
+          <label style="color: darkred">Fecha de inicio</label><br/>
+          <span>{{ quote.publicationDate }}</span>
+        </div>
+      </th>
+      <th class="economic-proposal">
+        <div>
+          <label style="color: darkred">Fecha Límite de Cotización</label><br/>
+          <span>{{ quote.limitDate }}</span>
+        </div>
+      </th>
+    </table>
+
+
+  </section>
+
+  <!--  <section class="provider-data">-->
+  <!--    <div class="field">-->
+  <!--      <label for="">Dirección:</label>-->
+  <!--      <span>av. uno lima perú </span>-->
+  <!--    </div>-->
+  <!--    <div class="field">-->
+  <!--      <label for="">RUC:</label>-->
+  <!--      <span>01234567890</span>-->
+  <!--    </div>-->
+  <!--    <div class="field">-->
+  <!--      <label for="">Razón Social</label>-->
+  <!--      <span>Proveedor 01</span>-->
+  <!--    </div>-->
+  <!--  </section>-->
+
+  <!--  <section class="quotes">-->
+  <!--    <div class="title row">Documentos</div>-->
+  <br/>
+  <section class="economic-proposal">
+    <p class="header">Estimados Proveedores</p>
+    <ul>
+      <li>La Central de Abastecimiento de Bienes Estratégicos del Seguro Social de Salud - CEABE ESSALUD, a través de la
+        Sub Gerencia de Programación y Elaboración de Expedientes, llevará en el marco de la normativa vigente de la ley
+        de Contrataciones del Estado y su Reglamento, la Indagación de Mercado para la "(213) solicitud de cotizacion
+        para
+        la contratacion de suministro de materiales, reactivos e nsumos de laboratorio para los eess de essalud por
+        periodo de (12) meses-09 items".
+      </li>
+      <li>La presentación de su cotización, deberá ser remitida mediante el formato denominado "Declaración jurada de
+        cotización", el mismo que se adjunta al presente, y a su vez acompañarla con los siguientes documentos: Ficha
+        RUC,
+        Registro Nacional de Proveedores, Declaración Juradas del Postor y Formato de Cotización.
+      </li>
+      <li>Cabe señalar que en caso de no remitir su cotización con la documentación antes señalada, su oferta no será
+        considerada válida, siendo desestimada
+      </li>
+      <li>Asimismo se solicita remita su mejor oferta y mejor plazo de entrega en 1 solo PDF, la adquisición se
+        efectuará
+        en el marco de la emergencia sanitiaria COVID-19
+      </li>
+      <li>Finalmente, su cotización deberá ser enviada con carácter de MUY URGENTE a los correos electrónicos, a más
+        tardar hasta el día: <strong>{{quote.limitDate}}</strong>
+      </li>
+    </ul>
+  </section>
+
+  <br/>
+  <section class="economic-proposal">
+    <p class="header">Documentos</p>
+    <table>
+      <tr>
+        <td *ngFor="let file of quote?.file">
+          <img src="assets/icons/pdf.png" alt="ICON">
+          <!-- <img src="assets/icons/{{file['ext']}}.png" alt="ICON">-->
+          <span>{{file['nombre']}}</span>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <br/>
+
+  <section class="economic-proposal">
+    <p class="header">Contactos</p>
+    <table>
+      <thead>
+      <th>Nombre Analista</th>
+      <th>Correo</th>
+      <th>Teléfonos - Anexos</th>
+      <th>Items</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let contact of quote?.contacts">
+        <td>{{contact.name}}</td>
+        <td><label class="product-name">{{ contact.email }}</label></td>
+        <td>  {{ contact.cellphone }}</td>
+        <td>< {{contact.item}}></td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <br/>
+  <!--  <section class="economic-proposal" >-->
+  <!--    <p class="header">Propuesta Económica</p>-->
+  <!--    <table>-->
+  <!--      <thead>-->
+  <!--      <th>IMAGEN</th>-->
+  <!--      <th>DESCRIPCIÓN</th>-->
+  <!--      <th>CANTIDAD</th>-->
+  <!--      <th>PRECIO UNIT</th>-->
+  <!--      <th>IMPORTE OFERTADO</th>-->
+  <!--      </thead>-->
+  <!--      <tbody>-->
+  <!--      <tr *ngFor="let product of quote?.products">-->
+  <!--        <td><img [src]="product.image" alt=""></td>-->
+  <!--        <td><label class="product-name">{{ product.name }}</label></td>-->
+  <!--        <td><span>{{ product.quantity | formatNumber:0 }} {{ product.unit }}</span></td>-->
+  <!--        <td><input type="number" style="width: 60px;" [(ngModel)]="product.price" class="form-control"/></td>-->
+  <!--        <td><span>S/ {{ product.quantity * product.price | formatNumber:2 }}</span></td>-->
+  <!--      </tr>-->
+  <!--      </tbody>-->
+  <!--    </table>-->
+  <!--    <div class="total">-->
+  <!--      <label>Total:</label>-->
+  <!--      <span class="total">S/. {{ total | formatNumber:2 }}</span>-->
+  <!--    </div>-->
+  <!--  </section>-->
+  <section class="quotes"  *ngIf="isLogged" >
+    <div class="title row"> Cotizaciones</div>
+    <div class="row proposals">
+      <div class="field row">
+        <span>Propuesta Técnica:</span>
+        <input style="display: none;" id="technical-proposal" type="file">
+        <label for="technical-proposal" class="input-file">
+          <img src="assets/icons/add-file.png" alt="PDF-ICON">
+          <span class="select-file-label">Seleccionar archivo</span>
+        </label>
+      </div>
+      <div class="field row">
+        <span>Propuesta Económica</span>
+        <input style="display: none;" id="economic-proposal" type="file">
+        <label for="economic-proposal" class="input-file">
+          <img src="assets/icons/add-file.png" alt="PDF-ICON">
+          <span class="select-file-label">Seleccionar archivo</span>
+        </label>
+      </div>
+    </div>
+    <p>
+      La cotización adjunta debe estar firmada y sellada. Asimismo, el precio ofertado debe incluir todos
+      los impuestos y retenciones de ley, debe ser igual al indicado en la propuesta económica
+    </p>
+  </section>
+  <div class="buttons" *ngIf="isLogged" >
+    <button (click)="sendQuote(quote?.id)" class="btn-send">POSTULAR</button>
+    <button [routerLink]="['cotizaciones']" class="btn-cancel">CANCELAR</button>
+  </div>
+  <br/><br/>
+</ng-template>
+<br/>
+
+<ng-template #postulatedQuote>
+  <!--  <div class="container postulated-quote">-->
+  <!--    <header>-->
+  <!--      <img [routerLink]="['cotizaciones']" src="assets/icons/arrow-left.png" alt="">-->
+  <!--      <span>Detalle de Cotización</span>-->
+  <!--    </header>-->
+  <!--    <section class="top-section">-->
+  <!--      <div class="row description">-->
+  <!--        <div>-->
+  <!--          <label>Descripción:</label>-->
+  <!--          <span>{{ quote?.description }}</span>-->
+  <!--        </div>-->
+  <!--        <div class="file">-->
+  <!--          <span>Ver EETT / TDR</span>-->
+  <!--          <img src="assets/icons/pdf.png" alt="">-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <div class="row">-->
+  <!--        <label>Características:</label>-->
+  <!--        <span>{{ quote?.features }}</span>-->
+  <!--      </div>-->
+  <!--      <div class="row">-->
+  <!--        <label>Fecha limite para cotizar: </label>-->
+  <!--        <span>{{ quote?.limitDate }}</span>-->
+  <!--      </div>-->
+  <!--    </section>-->
+  <!--    <section class="economic-proposal">-->
+  <!--      <table>-->
+  <!--        <thead>-->
+  <!--        <th>IMAGEN</th>-->
+  <!--        <th>DESCRIPCIÓN</th>-->
+  <!--        <th>CANTIDAD</th>-->
+  <!--        </thead>-->
+  <!--        <tbody>-->
+  <!--        <tr *ngFor="let product of quote?.products">-->
+  <!--          <td><img [src]="product.image" alt=""></td>-->
+  <!--          <td><label class="product-name">{{ product.name }}</label></td>-->
+  <!--          <td><span>{{ product.quantity | formatNumber: 0 }} {{ product.unit }}</span></td>-->
+  <!--        </tr>-->
+  <!--        </tbody>-->
+  <!--      </table>-->
+  <!--    </section>-->
+  <!--  </div>-->
+</ng-template>

@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="grid">
+        <div class="searcher">
+            <input (keyup.enter)="search(searcher.value)" #searcher placeholder="Buscar requerimiento">
+            <img src="assets/icons/search.png" alt="">
+        </div>
+        <div class="selects">
+            <app-selector class="mr-5" [options]="statusFilterOptions" (onChange)="onChangeStatusSelect($event)"></app-selector>
+            <app-selector [options]="numberPagesOptions" (onChange)="onChangeNumberPageSelect($event)"></app-selector>
+        </div>
+        <div class="paginator">
+            <div class="current-page">Pagina {{ currentPage }}</div>
+            <span class="number-pages">de {{ numberOfPages }}</span>
+            <img (click)="goPreviusPage()" class="btn-back" src="assets/icons/chevron-left.png" alt="">
+            <img (click)="goNextPage()" class="btn-next" src="assets/icons/chevron-right.png" alt="">
+        </div>
+
+        <div class="left flow-column">
+            <app-accordion class="sede-accordion" label="OEC">
+                <div *ngFor="let sede of headquartersOptions" class="option">
+                    <div class="form-field">
+                        <input [id]="sede.caption" [value]="sede.value" type="checkbox">
+                        <label [for]="sede.caption">{{ sede.caption }}</label>
+                    </div>
+                    <span class="counter">{{ sede.counter }}</span>
+                </div>
+            </app-accordion>
+
+            <app-accordion class="categories-accordion" label="Categorías">
+                <div *ngFor="let sede of categoriesOptions" class="option">
+                    <div class="form-field">
+                        <input [id]="sede.caption" [value]="sede.value" type="checkbox">
+                        <label [for]="sede.caption">{{ sede.caption }}</label>
+                    </div>
+                    <span class="counter">{{ sede.counter }}</span>
+                </div>
+            </app-accordion>
+        </div>
+
+        <div class="quote-list">
+            <div class="quote" *ngFor="let quote of displayedItems">
+                <app-quote-card [quote]="quote"></app-quote-card>
+            </div>
+        </div>
+    </div>
+</div>

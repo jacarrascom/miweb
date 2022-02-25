@@ -1,0 +1,48 @@
+<div class="quote-card">
+  <div class="content flow-column">
+    <div class="row header">
+      <span>{{ quote.requerimentName }}</span>
+      <div (click)="toggleMarker()" [ngClass]="{'marked': quote.marked}" class="mark">
+        <img src="assets/icons/mark.png" alt="">
+        <span>Me Interesa</span>
+      </div>
+    </div>
+    <p color="warn"> {{ quote.category['caption']}} </p>
+    <div class="description">{{ quote.description }}</div>
+    <hr>
+    <div class="dates flow-column">
+      <div class="row justify-space-around">
+        <div class="date flow-column">
+          <div class="row">
+            <img src="assets/icons/calendar.png" alt="">
+            <label for="">Fecha de Inicio</label>
+          </div>
+          <span class="value">{{ quote.publicationDate }}</span>
+        </div>
+        <div class="date flow-column">
+          <div class="row">
+            <img src="assets/icons/calendar.png" alt="">
+            <label for="">Fecha Límite de Cotización</label>
+          </div>
+          <span class="value">{{ quote.limitDate }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="buttons flow-column">
+
+      <div class="row file">
+        <img src="assets/icons/pdf.png" alt="ICON">
+        <span *ngIf="quote!.files.length== 0"> {{ 'Sin archivos' | uppercase }} </span>
+        <span *ngIf="quote!.files.length != 0"> {{ quote.files['nombre'] | uppercase }} </span>
+      </div>
+      <!--            <div *ngFor="let file of quote.file"  class="row file">-->
+      <!--                <img src="assets/icons/pdf.png" alt="ICON">-->
+      <!--&lt;!&ndash;                <img src="assets/icons/{{file['ext']}}.png" alt="ICON">&ndash;&gt;-->
+      <!--                <span>  {{file['nombre']}}</span>-->
+      <!--            </div>-->
+      <button [routerLink]="['detalle/' + quote.id]" [ngClass]="{'postulated': quote.postulated}" class="btn-postulate">
+        Ver Detalle
+      </button>
+    </div>
+  </div>
+</div>

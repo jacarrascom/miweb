@@ -1,0 +1,48 @@
+version: '3.3'
+
+volumes:
+  postgres_data:
+    driver: local
+
+
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: iam-ceabe-database
+    restart: on-failure
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest 
+    container_name: iam-ceabe-keycloak
+    restart: on-failure
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_SCHEMA: public
+      DB_PASSWORD: password
+      KEYCLOAK_USER: ceabe
+      KEYCLOAK_PASSWORD: ceabe
+    volumes:
+      - ./themes/ceabe:/opt/jboss/keycloak/themes/ceabe
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+
+
+    #docker cp iam-ceabe-keycloak:/opt/jboss/keycloak/themes/base/login/login.ftl ./themes/ceabe/login/login.ftl
+
+
+
+
+

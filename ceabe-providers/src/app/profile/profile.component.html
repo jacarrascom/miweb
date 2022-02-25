@@ -1,0 +1,167 @@
+<br/>
+<br/>
+<br/>
+<div class="container container__cemter--profile">
+  <div class="card-header d-flex align-items-center">
+    <div class="col-1 flex flex-column">
+      <strong class="title-profile">Perfil Proveedor</strong>
+    </div>
+    <div class="col-1 flex flex-column">
+
+      <!--      <a class="btn   btn-floating btn-lg"  href="http://localhost:4200/#/dashboard" role="button">-->
+      <!--        <i class="far fa-2x fa-arrow-alt-circle-left"></i>-->
+      <!--      </a>-->
+      <!-- <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-tile>{{businessName}}</mat-grid-tile>
+        <mat-grid-tile><span><b> RUC: </b>{{username}}</span></mat-grid-tile>
+      </mat-grid-list> -->
+      <mat-grid-list cols="4" rowHeight="2.5rem">
+        <mat-grid-tile rowspan="2">
+          <button (click)="goToHome()" mat-fab color="primary">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile rowspan="2"><span><b> Razon Social: </b> <br/>{{businessName}}</span></mat-grid-tile>
+        <mat-grid-tile rowspan="2"><span><b> RUC: </b> <br/> {{username}}</span></mat-grid-tile>
+        <mat-grid-tile rowspan="2">
+          <button mat-raised-button color="primary">
+            <mat-icon class="u-margin--small__right">save</mat-icon>Guardar</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-divider></mat-divider>
+      <br/>
+      <div novalidate>
+        <form (ngSubmit)="onUpdateSupplier()" [formGroup]="formSupplier">
+          <mat-toolbar class="form__title">
+            <span class="fill-remaining-space form__title--tittle">Categorias</span>
+          </mat-toolbar>
+          <div class="card mb-md-3">
+            <div class="card-body row">
+              <div class="row">
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12"
+                     *ngFor="let category of categoryList; let i=index">
+                  <div class="form-check">
+                    <input class="form-check-input" checked type="checkbox" [value]="category.code"
+                           [name]="category.name">
+                    <label>
+                      <span class=" pl-2"> {{  category.name }}</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <mat-toolbar class="form__title">
+            <span class="fill-remaining-space form__title--tittle">Datos del usuario</span>
+          </mat-toolbar>
+          <div class="u-margin__smalll--bottom">
+            <mat-grid-list cols="2" rowHeight="2.5rem">
+              <mat-grid-tile rowspan="2">
+                <p class="form__tittle--container">
+                  <mat-form-field class="form__tittle--container-form" appearance="outline">
+                    <mat-label>Correo Electronico</mat-label>
+                    <input matInput  formControlName="email" placeholder="Correo Electronico">
+                  </mat-form-field>
+                </p>
+              </mat-grid-tile>
+              <mat-grid-tile rowspan="2">
+                <p class="form__tittle--container">
+                  <mat-form-field class="form__tittle--container-form" appearance="outline">
+                    <mat-label>Representante legal</mat-label>
+                    <input matInput  formControlName="representative" placeholder="Representante legal">
+                  </mat-form-field>
+                </p>
+              </mat-grid-tile>
+              <mat-grid-tile rowspan="2">
+                <p class="form__tittle--container">
+                  <mat-form-field class="form__tittle--container-form" appearance="outline">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput  formControlName="phone" placeholder="Telefono">
+                  </mat-form-field>
+                </p>
+              </mat-grid-tile>
+              <mat-grid-tile rowspan="2">
+                <p class="form__tittle--container">
+                  <mat-form-field class="form__tittle--container-form" appearance="outline">
+                    <mat-label>Celular</mat-label>
+                    <input matInput  formControlName="cellphone" placeholder="Celular">
+                  </mat-form-field>
+                </p>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </form>
+
+        <mat-toolbar class="form__title">
+          <span class="fill-remaining-space form__title--tittle">Contacto</span>
+        </mat-toolbar>
+
+        
+
+        <mat-grid-list cols="1" rowHeight="2.5rem">
+          <mat-grid-tile rowspan="2">
+            <button mat-raised-button color="primary">AGREGAR NUEVO CONTACTO</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+      <!-- <div class="card mb-md-3">
+        <div class="card-header" style="background-color: #DCDCDC;">
+          Datos del usuario
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col">
+            <span class="form-group">
+              <label>Correo Electronico</label>
+              <input  formControlName="email" type="text" class="form-control"/>
+
+            </span>
+            </div>
+            <div class="col">
+            <span class="form-group">
+              <label>Representante legal</label>
+              <input formControlName="representative" type="text" class="form-control"/>
+
+            </span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+          <span class="form-group">
+            <label>Telefono</label>
+            <input formControlName="phone" type="text" class="form-control"/>
+
+          </span>
+            </div>
+            <div class="col">
+          <span class="form-group">
+            <label>Celular</label>
+            <input formControlName="cellphone" type="text" class="form-control"/>
+
+          </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-md-3">
+        <div class="card-header" style="background-color: #DCDCDC;">
+          Contacto
+        </div>
+        <div class="card-body">
+          <app-contact *ngFor="let contact of contacts; let i = index"
+                       (sendFormEmitter)="sendFormEmitter($event)"
+                       (registerFormEmitter)="registerFormEmitter($event)"
+                       (removeFormEmitter)="removeFormEmitter($event)"
+                       title="Contacto #{{i+1}}" [index]="i" [contact]="contact"></app-contact>
+
+
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center pt-4">
+            <button class="btn btn-primary" (click)="addContact()">Agregar nuevo contacto</button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    </div>
+    </div>

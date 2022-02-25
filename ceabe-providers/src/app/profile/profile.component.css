@@ -1,0 +1,43 @@
+.u-margin__smalll--bottom {
+    margin-bottom: 1rem;
+}
+
+.u-margin--small__right {
+    margin-right: 1rem;
+}
+
+.container__cemter--profile {
+    padding-left: 15rem;
+    padding-right: 15rem;
+}
+
+.mat-divider {
+    display: block;
+    margin: 0;
+    border-top-width: 2px;
+    border-top-style: solid;
+ }
+
+ .form__title {
+    background-color:#DCDCDC; 
+    height: 2rem;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+
+ }
+
+ .form__title--tittle {
+    font-weight: 200;
+    font-stretch: normal;
+    font-size: 16px;
+ }
+
+ .form__tittle--container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+ }
+
+ .form__tittle--container-form {
+    width: 90%;
+    height: 1.5rem;
+ }

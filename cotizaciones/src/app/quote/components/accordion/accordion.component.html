@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="select" (click)="open = !open">
+        <span>{{ label }}</span>
+        <img src="assets/icons/chevron-down.png" alt="">
+    </div>
+    <div class="dropdown" [ngClass]="{'opened': open}">
+        <ng-content></ng-content>
+    </div>
+</div>

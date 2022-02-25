@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import "stylings/_variables.scss"; 
+
+body {
+    margin: 0;
+}
+
+.form-control {
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    padding: 5px;
+    color: $dark-grey;
+    text-align: end;
+    &:focus,
+    &:focus-visible {
+        border: 1px solid $border-color;
+        outline: none;
+    }
+    &:disabled {
+        font-weight: 500;
+        color: #939393;
+    }
+}
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.flow-column {
+    display: flex;
+    flex-flow: column;
+}
+
+.justify-space-around {
+    justify-content: space-around;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
